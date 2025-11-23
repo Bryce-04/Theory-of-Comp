@@ -1,7 +1,7 @@
 function validateDFA(dfa) {
   const required = ["states", "alphabet", "transitions", "start_state", "accept_states"];
 
-  // Check required fields exist
+  // Check fi required fields exist
   for (const prop of required) {
     if (!dfa.hasOwnProperty(prop)) {
       return 0;
@@ -31,10 +31,10 @@ function validateDFA(dfa) {
     }
   }
 
-  // start_state must be valid
+  // start state must be valid
   if (!states.includes(start_state)) return 0;
 
-  // accept_states must all be valid
+  // accept states must all be valid
   if (!Array.isArray(accept_states)) return 0;
   for (const a of accept_states) {
     if (!states.includes(a)) return 0;
@@ -66,7 +66,7 @@ const invalidDFA1 = {
   states: ["q0", "q1"],
   alphabet: ["a", "b"],
   transitions: {
-    q0: { a: "q1" },         // Missing 'b' transition → invalid
+    q0: { a: "q1" },         // Missing 'b' transition  invalid
     q1: { a: "q0", b: "q1" }
   },
   start_state: "q0",
@@ -78,12 +78,12 @@ const invalidDFA2 = {
   states: ["s0", "s1"],
   alphabet: ["a"],
   transitions: {
-    s0: { a: "BAD" },       // "BAD" not in states → invalid
+    s0: { a: "S100" },       // "S100" not in states  invalid
     s1: { a: "s0" }
   },
   start_state: "s0",
   accept_states: ["s1"]
 };
-console.log("Valid DFA:", validateDFA(validDFA));         // → 1
-console.log("Invalid DFA #1:", validateDFA(invalidDFA1)); // → 0
-console.log("Invalid DFA #2:", validateDFA(invalidDFA2)); // → 0
+console.log("Valid DFA:", validateDFA(validDFA));         
+console.log("Invalid DFA #1:", validateDFA(invalidDFA1)); 
+console.log("Invalid DFA #2:", validateDFA(invalidDFA2)); 

@@ -213,3 +213,31 @@ function simulateTM(tm, input, maxSteps = 1000) {
   console.log("Max steps (" + maxSteps + ") exceeded — aborting.");
   return { result: "TIMEOUT", steps: maxSteps, tape: tape };
 }
+
+const exampleDFA = {
+  states: [0, 1, 2, 3],
+  alphabet: ["a", "b"],
+  transitions: {
+    0: { a: 1, b: 2 },
+    1: { a: 0, b: 3 },
+    2: { a: 3, b: 0 },
+    3: { a: 2, b: 1 }
+  },
+  start_state: 0,
+  accept_states: [0, 3]
+};
+
+// Convert DFA -> TM
+const tm = convertDFAtoTMD(exampleDFA);
+
+// Print TM summary (optional)
+console.log("Converted TM (full transitions):");
+console.log(JSON.stringify(tm, null, 2));
+
+// Simulate TM on some test inputs
+const testInputs = ["", "b", "ab"];
+for (const input of testInputs) {
+  console.log("\n===============================");
+  console.log(`Simulating input "${input}"`);
+  simulateTM(tm, input, 100);
+}

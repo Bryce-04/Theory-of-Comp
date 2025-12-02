@@ -230,7 +230,7 @@ const exampleDFA = {
 // Convert DFA -> TM
 const tm = convertDFAtoTMD(exampleDFA);
 
-// Print TM summary (optional)
+// Print TM summary 
 console.log("Converted TM (full transitions):");
 console.log(JSON.stringify(tm, null, 2));
 

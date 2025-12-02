@@ -33,14 +33,14 @@ function convertDFAtoTMD(dfa) {
   return tm;
 }
 
-// --------------------------------
+
 // TM Simulator with tape visualization
-// --------------------------------
+
 function simulateTM(tm, input, maxSteps = 1000) {
 
-  // ------------------------------------------------------
+
   //  Basic validation
-  // ------------------------------------------------------
+
   if (!tm || typeof tm !== "object") {
     throw new Error("simulateTM: TM must be an object.");
   }
@@ -48,9 +48,9 @@ function simulateTM(tm, input, maxSteps = 1000) {
     throw new Error("simulateTM: input must be a string.");
   }
 
-  // ------------------------------------------------------
+
   // Initialize tape, head, and state
-  // ------------------------------------------------------
+
   // Tape is an array of characters. If input is empty, use blank.
   let tape;
   if (input.length > 0) {
@@ -64,9 +64,8 @@ function simulateTM(tm, input, maxSteps = 1000) {
   let state = tm.startState; // start state from the TM object
 
 
-  // ------------------------------------------------------
   // Function that prints a current view of the tape
-  // ------------------------------------------------------
+
   function tapeCurrent() {
 
     //Determine leftmost and rightmost non-blank cell
@@ -124,9 +123,9 @@ function simulateTM(tm, input, maxSteps = 1000) {
   }
 
 
-  // ------------------------------------------------------
+
   // Print initial configuration
-  // ------------------------------------------------------
+
   console.log("\n--- TM Simulation Start ---");
   console.log('Input: "' + input + '"');
   console.log("Start state: " + state + "\n");
@@ -137,9 +136,9 @@ function simulateTM(tm, input, maxSteps = 1000) {
               " headPos=" + current.headIndex);
   console.log(" ".repeat(7) + current.marker + "\n");
 
-  // ------------------------------------------------------
+
   // Main simulation loop
-  // ------------------------------------------------------
+
   let steps = 0;
 
   while (steps < maxSteps) {
@@ -176,9 +175,9 @@ function simulateTM(tm, input, maxSteps = 1000) {
       return { result: "REJECT", steps: steps, tape: tape };
     }
 
-    // ------------------------------------------------------
+
     //Apply the transition (write, move, nextState)
-    // ------------------------------------------------------
+
 
     tape[head] = action.write;
 
@@ -196,9 +195,8 @@ function simulateTM(tm, input, maxSteps = 1000) {
   
     state = action.nextState;
 
-    // ------------------------------------------------------
     // Print snapshot after this step
-    // ------------------------------------------------------
+
     current = tapeCurrent();
 
     console.log("Step " + steps + ": state=" + state +
@@ -207,9 +205,9 @@ function simulateTM(tm, input, maxSteps = 1000) {
     console.log(" ".repeat(7) + current.marker + "\n");
   }
 
-  // ------------------------------------------------------
+
   // If we hit max steps
-  // ------------------------------------------------------
+
   console.log("Max steps (" + maxSteps + ") exceeded — aborting.");
   return { result: "TIMEOUT", steps: maxSteps, tape: tape };
 }
